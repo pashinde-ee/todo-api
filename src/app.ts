@@ -10,6 +10,11 @@ if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
 
+app.get('/cors', (req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
+	res.send({ "msg": "This has CORS enabled 🎈" })
+});
+
 app.use("/api/v1/todo", todoRoute);
 
 app.get("/", (req, res) => {

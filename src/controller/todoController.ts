@@ -3,6 +3,7 @@ import { RequestHandler } from "express";
 
 export const getTodo: RequestHandler = async (req, res) => {
 	try {
+		res.set('Access-Control-Allow-Origin', '*');
 		const todos = await Todo.find();
 		if (todos.length === 0)
 			res
@@ -22,6 +23,7 @@ export const getTodo: RequestHandler = async (req, res) => {
 };
 
 export const addTodo: RequestHandler = async (req, res) => {
+	res.set('Access-Control-Allow-Origin', '*');
 	try {
 		const newTodo = await Todo.create(req.body);
 
@@ -43,6 +45,7 @@ export const addTodo: RequestHandler = async (req, res) => {
 
 export const updateTodo: RequestHandler = async (req, res) => {
 	try {
+		res.set('Access-Control-Allow-Origin', '*');
 		if (req.body.isCompleted === undefined)
 			res
 				.status(400)
@@ -68,6 +71,7 @@ export const updateTodo: RequestHandler = async (req, res) => {
 
 export const deleteTodo: RequestHandler = async (req, res) => {
 	try {
+		res.set('Access-Control-Allow-Origin', '*');
 		const todo = await Todo.findByIdAndDelete(req.params.id);
 		res.status(200).json({
 			status: "success",
